@@ -19,8 +19,16 @@ public class QuantityMeasurementApp {
         private final Double value2;
 
         public Feet(Double value1, Double value2) {
+
             this.value1 = value1;
             this.value2 = value2;
+
+            if (Double.isNaN(value1) || Double.isInfinite(value1) && Double.isNaN(value2) || Double.isInfinite(value2)) {
+                throw new IllegalArgumentException("Invalid double value");
+            }
+            if (value1 < 0 || value1 > 13 && value2 < 0 || value2 > 13) { // Example range check
+                throw new IllegalArgumentException("Value out of range");
+            }
         }
 
         //override equals method for equality check
@@ -49,7 +57,7 @@ public class QuantityMeasurementApp {
     public static void main(String[] args) {
 
        System.out.println("Feet measurement");
-       Feet feet = new Feet(10.2,10.1);
+       Feet feet = new Feet(Double.parseDouble("ddd"),10.1);
       if(feet.value1 !=null && feet.value2 != null) {
         boolean flag =  feet.value1.equals(feet.value2);
           System.out.println(flag);
