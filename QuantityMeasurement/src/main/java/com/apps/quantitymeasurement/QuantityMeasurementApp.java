@@ -23,7 +23,7 @@ public class QuantityMeasurementApp {
             this.value2 = value2;
         }
 
-        //override equals method
+        //override equals method for equality check
 
         @Override
         public boolean equals(Object o) {
@@ -31,7 +31,6 @@ public class QuantityMeasurementApp {
             Feet feet = (Feet) o;
             return Double.compare(value1, feet.value1) == 0 && Double.compare(value2, feet.value2) == 0;
         }
-
         @Override
         public int hashCode() {
             return Objects.hash(value1, value2);
