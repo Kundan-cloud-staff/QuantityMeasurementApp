@@ -15,6 +15,9 @@ public class QuantityLength {
         if(!Double.isFinite(value)){
             throw  new IllegalArgumentException("Value should be finite");
         }
+        if(unit == null){
+            throw new IllegalArgumentException("Unit must not be null");
+        }
         this.value = value;
         this.unit = unit;
     }
@@ -30,11 +33,19 @@ public class QuantityLength {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         QuantityLength otherLength = (QuantityLength) o;
-        return Double.compare(this.convertToBaseUnit(),otherLength.convertToBaseUnit()) == 0;
+        return Double.compare(Math.round(this.convertToBaseUnit()),Math.round(otherLength.convertToBaseUnit())) == 0;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(value, unit);
+    }
+
+    @Override
+    public String toString() {
+        return "QuantityLength{" +
+                "value=" + value +
+                ", unit=" + unit +
+                '}';
     }
 }

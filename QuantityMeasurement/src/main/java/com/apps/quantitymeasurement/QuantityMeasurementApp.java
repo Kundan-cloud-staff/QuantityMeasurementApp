@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class QuantityMeasurementApp {
 
-    public static boolean demonstarateLengthEquality(QuantityLength length1, QuantityLength length2){
+   /* public static boolean demonstarateLengthEquality(QuantityLength length1, QuantityLength length2){
         boolean result = length1.compare(length2);
         System.out.println("LengthEquality:: "+result);
         return result;
@@ -79,16 +79,37 @@ public class QuantityMeasurementApp {
         System.out.println("Inches InEquality:: "+result);
         return result;
     }
+*/
+    public static boolean demonstarateLengthComparision(QuantityLength length1, QuantityLength length2){
+        boolean result = length1.equals(length2);
+        System.out.println("demonstarateLengthComparision:: "+result);
+        return result;
+    }
 
     public static void main(String[] args) {
-        QuantityLength lengthFeet = new QuantityLength(1.0, LengthUnit.FEET);
-        QuantityLength lengthInches = new QuantityLength(12.0, LengthUnit.INCHES);
-        demonstarateLengthEquality(lengthFeet, lengthInches);
+       // QuantityLength lengthFeet = new QuantityLength(1.0, LengthUnit.FEET);
+       // QuantityLength lengthInches = new QuantityLength(12.0, LengthUnit.INCHES);
+        /*demonstarateLengthEquality(lengthFeet, lengthInches);
         demonstarateFeetEquality();
         demonstarateInchesEquality();
         demonstarateFeetInchesComparision();
         demonstarateFeetInEquality();
         demonstarateInchesInEquality();
-        demonstarateMultipleFeetComparision();
+        demonstarateMultipleFeetComparision();*/
+
+        demonstarateLengthComparision(new QuantityLength(1.0, LengthUnit.FEET),
+                new QuantityLength(12.0, LengthUnit.INCHES));
+
+        demonstarateLengthComparision(new QuantityLength(1.0, LengthUnit.YARD),
+                new QuantityLength(36.0, LengthUnit.INCHES));
+
+        demonstarateLengthComparision(new QuantityLength(100.0, LengthUnit.CENTIMETERS),
+                new QuantityLength(39.3701, LengthUnit.INCHES));
+
+        demonstarateLengthComparision(new QuantityLength(3.0, LengthUnit.FEET),
+                new QuantityLength(1.0, LengthUnit.YARD));
+
+        demonstarateLengthComparision(new QuantityLength(30.48, LengthUnit.CENTIMETERS),
+                new QuantityLength(1.0, LengthUnit.FEET));
     }
 }
