@@ -11,119 +11,84 @@ import java.util.Objects;
 
 public class QuantityMeasurementApp {
 
-    //Inner class to represent Feet measurement
+    public static boolean demonstarateLengthEquality(QuantityLength length1, QuantityLength length2){
+        boolean result = length1.compare(length2);
+        System.out.println("LengthEquality:: "+result);
+        return result;
+    }
 
-    public static class Feet {
+    public static boolean demonstarateFeetEquality(){
+        QuantityLength lengthFeet = new QuantityLength(1.0, LengthUnit.FEET);
+        QuantityLength lengthInches = new QuantityLength(1.0, LengthUnit.FEET);
+        boolean result = lengthFeet.equals(lengthInches);
+        System.out.println("FeetEquality:: "+result);
+        return result;
+    }
 
-        private final Double value1;
-        private final Double value2;
+    public static boolean demonstarateInchesEquality(){
+        QuantityLength lengthFeet = new QuantityLength(18.0, LengthUnit.INCHES);
+        QuantityLength lengthInches = new QuantityLength(18.0, LengthUnit.INCHES);
+        boolean result = lengthFeet.equals(lengthInches);
+        System.out.println("InchesEquality:: "+result);
+        return result;
+    }
 
-        public Feet(Double value1, Double value2) {
-
-            this.value1 = value1;
-            this.value2 = value2;
-
-            if(value1 == null || value2 == null) {
-                throw new NullPointerException("Null Value not allowed");
-            }
-            if (Double.isNaN(value1) || Double.isInfinite(value1) && Double.isNaN(value2) || Double.isInfinite(value2)) {
-                throw new IllegalArgumentException("Invalid double value");
-            }
-        }
-
-        //Define a static method to demonstrate Feet equality check
-        public static void demonstrateFeetEquaility(Double value1, Double value2) {
-            boolean flag = false;
-            QuantityMeasurementApp.Feet feet = new QuantityMeasurementApp.Feet(value1,value2);
-            if(value1 == null || value2 == null) {
-                throw new NullPointerException("Null Value not allowed");
-            }
-             flag = Double.compare(value1, feet.value1) == 0 && Double.compare(value2, feet.value2) == 0;
-            System.out.println("Feet Equality :: "+ flag);
-
-        }
-        //override equals method for equality check
-
-        @Override
-        public boolean equals(Object o) {
-            if (o == null || getClass() != o.getClass()) return false;
-            Feet feet = (Feet) o;
-            return Double.compare(value1, feet.value1) == 0 && Double.compare(value2, feet.value2) == 0;
-        }
-        @Override
-        public int hashCode() {
-            return Objects.hash(value1, value2);
-        }
-
-        public Double getValue1() {
-            return value1;
-        }
-
-        public Double getValue2() {
-            return value2;
-        }
+    public static boolean demonstarateFeetInchesComparision() {
+        QuantityLength lengthFeet = new QuantityLength(1.0, LengthUnit.FEET);
+        QuantityLength lengthInches = new QuantityLength(13.0, LengthUnit.INCHES);
+        boolean result = lengthFeet.equals(lengthInches);
+        System.out.println("Feet-Inches Comparision:: "+result);
+        return result;
 
     }
-    public static class Inches {
-
-        private final Double value1;
-        private final Double value2;
-
-        public Inches(Double value1, Double value2) {
-
-            this.value1 = value1;
-            this.value2 = value2;
-
-            if (Double.isNaN(value1) || Double.isInfinite(value1) && Double.isNaN(value2) || Double.isInfinite(value2)) {
-                throw new IllegalArgumentException("Invalid double value");
-            }
-        }
-
-        public Double getValue1() {
-            return value1;
-        }
-
-        public Double getValue2() {
-            return value2;
-        }
-
-        //Define a static method to demonstrate Feet equality check
-        public static void demonstrateInchesEquaility(Double value1, Double value2) {
-            QuantityMeasurementApp.Inches inches = new QuantityMeasurementApp.Inches(value1, value2);
-            boolean flag = Double.compare(value1, inches.value1) == 0 && Double.compare(value2, inches.value2) == 0;
-            System.out.println("Inches Equality :: " + flag);
-
-        }
+    public static boolean demonstarateFeetInEquality(){
+        QuantityLength lengthFeet = new QuantityLength(1.0, LengthUnit.FEET);
+        QuantityLength lengthInches = new QuantityLength(2.0, LengthUnit.FEET);
+        boolean result = lengthFeet.equals(lengthInches);
+        System.out.println("Feet InEquality:: "+result);
+        return result;
     }
-        public static void main(String[] args) {
-            boolean flag = false;
-            System.out.println("Feet measurement");
 
-            QuantityMeasurementApp.Feet feet = new QuantityMeasurementApp.Feet(10.1, 10.1);
-            Feet.demonstrateFeetEquaility(feet.value1, feet.value2);
+    public static boolean demonstarateCrossUnitInEquality(){
+        QuantityLength lengthFeet = new QuantityLength(1.0, LengthUnit.FEET);
+        QuantityLength lengthInches = new QuantityLength(18.0, LengthUnit.INCHES);
+        boolean result = lengthFeet.equals(lengthInches);
+        System.out.println("Cross Unit InEquality:: "+result);
+        return result;
+    }
 
-            QuantityMeasurementApp.Inches inches = new QuantityMeasurementApp.Inches(25.0, 25.0);
-            Inches.demonstrateInchesEquaility(inches.value1, inches.value2);
+    public static boolean demonstarateMultipleFeetComparision(){
+        QuantityLength lengthFeet = new QuantityLength(2.0, LengthUnit.FEET);
+        QuantityLength lengthInches = new QuantityLength(2.0, LengthUnit.FEET);
+        boolean result = lengthFeet.equals(lengthInches);
+        QuantityLength lengthInches1 = new QuantityLength(10.0, LengthUnit.FEET);
+        QuantityLength lengthFeet1 = new QuantityLength(10.0, LengthUnit.FEET);
+        boolean result1 = lengthFeet.equals(lengthInches);
 
-        /*if(feet.value1 !=null && feet.value2 != null) {
-            flag =  feet.value1.equals(feet.value2);
-            System.out.println(flag);
-        }*/
-
-            //Different class
-            //QuantityMeasurementApp.Feet feetStrigVal = new QuantityMeasurementApp.Feet(Double.parseDouble("ddd"),10.1);
-            //flag =  feetStrigVal.value1.equals(feetStrigVal.value2);
-            //System.out.println(flag);
-
-            //null value
-            //QuantityMeasurementApp.Feet feetNullValue = new QuantityMeasurementApp.Feet(null,10.1);
-            //  flag = feetNullValue.value1.equals(feetNullValue.value2);
-            //System.out.println(flag);
-
-            QuantityMeasurementApp.Feet feetRange = new QuantityMeasurementApp.Feet(14.5, 14.5);
-            if (feetRange.value1 != null && feetRange.value2 != null) {
-                flag = feetRange.value1.equals(feetRange.value2);
-                System.out.println(flag);
-            }
+        if(result && result1){
+            System.out.println("MultipleComparision:: " +true);
+            return true;
         }
+        return false;
+    }
+
+    public static boolean demonstarateInchesInEquality(){
+        QuantityLength lengthFeet = new QuantityLength(12.0, LengthUnit.INCHES);
+        QuantityLength lengthInches = new QuantityLength(10.0, LengthUnit.INCHES);
+        boolean result = lengthFeet.equals(lengthInches);
+        System.out.println("Inches InEquality:: "+result);
+        return result;
+    }
+
+    public static void main(String[] args) {
+        QuantityLength lengthFeet = new QuantityLength(1.0, LengthUnit.FEET);
+        QuantityLength lengthInches = new QuantityLength(12.0, LengthUnit.INCHES);
+        demonstarateLengthEquality(lengthFeet, lengthInches);
+        demonstarateFeetEquality();
+        demonstarateInchesEquality();
+        demonstarateFeetInchesComparision();
+        demonstarateFeetInEquality();
+        demonstarateInchesInEquality();
+        demonstarateMultipleFeetComparision();
+    }
 }
