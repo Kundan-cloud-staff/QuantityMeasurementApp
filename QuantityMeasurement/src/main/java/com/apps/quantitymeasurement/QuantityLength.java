@@ -7,6 +7,8 @@ public class QuantityLength {
     private final double value;
     private final LengthUnit unit;
 
+    private static final double EPSILON = 0.0001;
+
     public QuantityLength(double value, LengthUnit unit) {
 
         if(Double.isNaN(value)){
@@ -21,6 +23,7 @@ public class QuantityLength {
         this.value = value;
         this.unit = unit;
     }
+
     private double convertToBaseUnit() {
         return unit.convertToBaseUnit(value);
     }
@@ -47,5 +50,33 @@ public class QuantityLength {
                 "value=" + value +
                 ", unit=" + unit +
                 '}';
+    }
+
+    //convert length unit to specific target unit
+
+    public static double convertToTargetUnit(double value, LengthUnit sourceUnit,LengthUnit targetUnit){
+
+        //validate
+        validate(value, sourceUnit,targetUnit);
+
+        //convert to base unit
+        double valueInBaseUnit = value *sourceUnit.getConversionFactor();
+
+        //convert base unit to target unit
+        double result = valueInBaseUnit/targetUnit.getConversionFactor();
+        return  Math.round(result*100)/100.0;
+
+    }
+    private static void validate(double value, LengthUnit sourceUnit,LengthUnit targetUnit) {
+
+        if(Double.isNaN(value)){
+            throw  new IllegalArgumentException("Value can be numeric");
+        }
+        if(!Double.isFinite(value)){
+            throw  new IllegalArgumentException("Value can be finite");
+        }
+        if(sourceUnit==null || targetUnit == null){
+            throw  new IllegalArgumentException("Source unit or target unit can not be null");
+        }
     }
 }
