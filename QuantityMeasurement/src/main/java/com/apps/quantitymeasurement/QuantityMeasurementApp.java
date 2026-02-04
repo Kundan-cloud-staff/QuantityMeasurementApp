@@ -34,6 +34,7 @@ public class QuantityMeasurementApp {
         return result;
     }
 
+
     public static void main(String[] args) {
        // QuantityLength lengthFeet = new QuantityLength(1.0, LengthUnit.FEET);
        // QuantityLength lengthInches = new QuantityLength(12.0, LengthUnit.INCHES);
@@ -79,6 +80,8 @@ public class QuantityMeasurementApp {
         //UC7
         QuantityMeasurementApp.addQuantityLengthWithTargetUnit(new QuantityLength(1.0, LengthUnit.FEET),
                 new QuantityLength(12.0, LengthUnit.INCHES), LengthUnit.FEET);
+
+        //UC8: Refactoring Unit Enum to Standalone with Conversion Responsibility
 
 
 

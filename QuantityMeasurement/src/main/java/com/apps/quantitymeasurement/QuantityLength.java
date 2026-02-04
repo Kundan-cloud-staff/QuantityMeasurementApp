@@ -28,6 +28,10 @@ public class QuantityLength {
         return unit;
     }
 
+    public double getValue() {
+        return value;
+    }
+
     private double convertToBaseUnit() {
         return unit.convertToBaseUnit(value);
     }
@@ -95,7 +99,6 @@ public class QuantityLength {
 
     }
     //UC7: Addition with Target Unit Specification
-    //add(QuantityLength l1, QuantityLength l1, targetUnit) → Output: QuantityLength--targetUnit
 
     public static double addQuantityLengthWithTargetUnit(QuantityLength length1, QuantityLength otherLength,LengthUnit lengthUnit){
 
@@ -106,5 +109,8 @@ public class QuantityLength {
         return convertToTargetUnit(sum, length1.getUnit(),lengthUnit);
 
     }
+
+    //UC8: Refactoring Unit Enum to Standalone with Conversion Responsibility
+
 
 }

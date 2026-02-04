@@ -18,10 +18,11 @@ public enum LengthUnit {
         return conversionFactor;
     }
 
-   /* public double convertToBaseUnit() {
-        return LengthUnit.FEET.conversionFactor;
-    }*/
+    public double convertToBaseUnit() {
+        return LengthUnit.INCHES.conversionFactor;
+    }
    public double convertToBaseUnit(double value) {
-       return value * conversionFactor;
+       return (double) Math.round(value * conversionFactor * 1000) /1000;
    }
+
 }
