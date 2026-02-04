@@ -94,4 +94,17 @@ public class QuantityLength {
         return  Math.round(sum*1000)/1000.0;
 
     }
+    //UC7: Addition with Target Unit Specification
+    //add(QuantityLength l1, QuantityLength l1, targetUnit) → Output: QuantityLength--targetUnit
+
+    public static double addQuantityLengthWithTargetUnit(QuantityLength length1, QuantityLength otherLength,LengthUnit lengthUnit){
+
+        if(length1 == null || otherLength == null || lengthUnit == null) {
+            throw new IllegalArgumentException("Length should not be null");
+        }
+        double sum = addQuantityLength(length1,otherLength);
+        return convertToTargetUnit(sum, length1.getUnit(),lengthUnit);
+
+    }
+
 }

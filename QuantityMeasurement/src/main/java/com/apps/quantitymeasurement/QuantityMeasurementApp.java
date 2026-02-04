@@ -26,7 +26,12 @@ public class QuantityMeasurementApp {
         double  sumOfQuantityLengths = QuantityLength.addQuantityLength(sourceLength,otherLength);
         System.out.println("sumOfQuantityLengths" + sourceLength + "and "+ otherLength + " == " +sumOfQuantityLengths +""+sourceLength.getUnit());
         return sumOfQuantityLengths;
+    }
 
+    public static double addQuantityLengthWithTargetUnit(QuantityLength sourceLength, QuantityLength otherLength,LengthUnit targetUnit){
+        double result = QuantityLength.addQuantityLengthWithTargetUnit(sourceLength,otherLength,targetUnit);
+        System.out.println("sumOfQuantityLengthsWithTargetUnit" + sourceLength + "and "+ otherLength + "with traget Unit" + targetUnit +"== " +result +""+targetUnit);
+        return result;
     }
 
     public static void main(String[] args) {
@@ -62,7 +67,7 @@ public class QuantityMeasurementApp {
 
         //UC6
 
-         addQuantityLength(new QuantityLength(1.0, LengthUnit.FEET),new QuantityLength(2.0, LengthUnit.FEET));
+        addQuantityLength(new QuantityLength(1.0, LengthUnit.FEET),new QuantityLength(2.0, LengthUnit.FEET));
         addQuantityLength(new QuantityLength(1.0, LengthUnit.FEET),new QuantityLength(12.0, LengthUnit.INCHES));
         addQuantityLength(new QuantityLength(12.0, LengthUnit.INCHES),new QuantityLength(1.0, LengthUnit.FEET));
         addQuantityLength(new QuantityLength(1.0, LengthUnit.YARD),new QuantityLength(3.0, LengthUnit.FEET));
@@ -70,6 +75,11 @@ public class QuantityMeasurementApp {
         addQuantityLength(new QuantityLength(2.54, LengthUnit.CENTIMETERS),new QuantityLength(1.0, LengthUnit.INCHES));
         addQuantityLength(new QuantityLength(5.0, LengthUnit.FEET),new QuantityLength(0.0, LengthUnit.INCHES));
         addQuantityLength(new QuantityLength(5.0, LengthUnit.FEET),new QuantityLength(-2.0, LengthUnit.FEET));
+
+        //UC7
+        QuantityMeasurementApp.addQuantityLengthWithTargetUnit(new QuantityLength(1.0, LengthUnit.FEET),
+                new QuantityLength(12.0, LengthUnit.INCHES), LengthUnit.FEET);
+
 
 
     }
