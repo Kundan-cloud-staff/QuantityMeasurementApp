@@ -458,5 +458,4 @@ public class QuantityMeasurementAppTest {
                 new QuantityLength(12.0, LengthUnit.INCHES), LengthUnit.YARD);
         Assertions.assertEquals(0.667,sum);
     }
-
 }
