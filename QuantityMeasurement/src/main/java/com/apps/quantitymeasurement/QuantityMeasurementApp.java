@@ -22,6 +22,12 @@ public class QuantityMeasurementApp {
     System.out.println(value +" " + sourceUnit + " == " + convertedValue + " " +targetUnit);
      return convertedValue;
     }
+    public static double addQuantityLength(QuantityLength sourceLength, QuantityLength otherLength){
+        double  sumOfQuantityLengths = QuantityLength.addQuantityLength(sourceLength,otherLength);
+        System.out.println("sumOfQuantityLengths" + sourceLength + "and "+ otherLength + " == " +sumOfQuantityLengths +""+sourceLength.getUnit());
+        return sumOfQuantityLengths;
+
+    }
 
     public static void main(String[] args) {
        // QuantityLength lengthFeet = new QuantityLength(1.0, LengthUnit.FEET);
@@ -53,5 +59,18 @@ public class QuantityMeasurementApp {
         demonstrateLengthConversion(36.0, LengthUnit.INCHES,LengthUnit.YARD);
         demonstrateLengthConversion(1.0, LengthUnit.CENTIMETERS,LengthUnit.INCHES);
         demonstrateLengthConversion(0.0, LengthUnit.FEET,LengthUnit.INCHES);
+
+        //UC6
+
+         addQuantityLength(new QuantityLength(1.0, LengthUnit.FEET),new QuantityLength(2.0, LengthUnit.FEET));
+        addQuantityLength(new QuantityLength(1.0, LengthUnit.FEET),new QuantityLength(12.0, LengthUnit.INCHES));
+        addQuantityLength(new QuantityLength(12.0, LengthUnit.INCHES),new QuantityLength(1.0, LengthUnit.FEET));
+        addQuantityLength(new QuantityLength(1.0, LengthUnit.YARD),new QuantityLength(3.0, LengthUnit.FEET));
+        addQuantityLength(new QuantityLength(36.0, LengthUnit.INCHES),new QuantityLength(1.0, LengthUnit.YARD));
+        addQuantityLength(new QuantityLength(2.54, LengthUnit.CENTIMETERS),new QuantityLength(1.0, LengthUnit.INCHES));
+        addQuantityLength(new QuantityLength(5.0, LengthUnit.FEET),new QuantityLength(0.0, LengthUnit.INCHES));
+        addQuantityLength(new QuantityLength(5.0, LengthUnit.FEET),new QuantityLength(-2.0, LengthUnit.FEET));
+
+
     }
 }

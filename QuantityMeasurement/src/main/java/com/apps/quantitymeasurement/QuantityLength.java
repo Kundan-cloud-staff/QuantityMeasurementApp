@@ -24,6 +24,10 @@ public class QuantityLength {
         this.unit = unit;
     }
 
+    public LengthUnit getUnit() {
+        return unit;
+    }
+
     private double convertToBaseUnit() {
         return unit.convertToBaseUnit(value);
     }
@@ -64,7 +68,7 @@ public class QuantityLength {
 
         //convert base unit to target unit
         double result = valueInBaseUnit/targetUnit.getConversionFactor();
-        return  Math.round(result*100)/100.0;
+        return  Math.round(result*1000)/1000.0;
 
     }
     private static void validate(double value, LengthUnit sourceUnit,LengthUnit targetUnit) {
@@ -78,5 +82,16 @@ public class QuantityLength {
         if(sourceUnit==null || targetUnit == null){
             throw  new IllegalArgumentException("Source unit or target unit can not be null");
         }
+    }
+
+    public static double addQuantityLength(QuantityLength length1, QuantityLength otherLength){
+
+        if(length1 == null || otherLength == null){
+            throw new IllegalArgumentException("Length should not be null");
+        }
+        double convertedValue = convertToTargetUnit(otherLength.value, otherLength.unit, length1.unit);
+        double sum = length1.value + convertedValue;
+        return  Math.round(sum*1000)/1000.0;
+
     }
 }
