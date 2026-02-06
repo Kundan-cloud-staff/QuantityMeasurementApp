@@ -18,6 +18,13 @@ public enum LengthUnit {
         return conversionFactor;
     }
 
+    @Override
+    public String toString() {
+        return "LengthUnit{" +
+                "conversionFactor=" + conversionFactor +
+                '}';
+    }
+
     public double convertToBaseUnit() {
         return LengthUnit.INCHES.conversionFactor;
     }

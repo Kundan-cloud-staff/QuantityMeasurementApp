@@ -7,7 +7,7 @@ public class QuantityLength {
     private final double value;
     private final LengthUnit unit;
 
-    private static final double EPSILON = 0.0001;
+    //private static final double EPSILON = 0.0001;
 
     public QuantityLength(double value, LengthUnit unit) {
 
@@ -112,5 +112,5 @@ public class QuantityLength {
 
     //UC8: Refactoring Unit Enum to Standalone with Conversion Responsibility
 
-
+    //UC9: Weight Measurement Equality, Conversion, and Addition (Kilogram, Gram, Pound)
 }
