@@ -2,7 +2,7 @@ package com.apps.quantitymeasurement;
 
 import java.util.Optional;
 
-public enum WeightUnit {
+public enum WeightUnit implements IMeasurable {
 
     //conversion factor to base unit gram
     KILOGRAM(1.0),
@@ -10,7 +10,8 @@ public enum WeightUnit {
     POUND(0.453592);
     //MILLIGRAM(0.001),
     //TONNE(1_000_000.0);
-
+    private static final double EPSILON = 0.01;
+    //1e-9
     private final double weightConversionFactor;
 
     WeightUnit(double weightConversionFactor){
@@ -44,16 +45,27 @@ public enum WeightUnit {
         return (double) Math.round((baseValue / this.weightConversionFactor) * 1000) /1000;
     }
 
-    public static void main(String[] args) {
-        double kilograms = 1.0;
-        double grams = WeightUnit.GRAM.convertToBaseUnitKG(kilograms);
-        System.out.println(kilograms+ " kilogram is " + grams + "grams");
+    @Override
+    public double getConversionFactor() {
+        return weightConversionFactor;
+    }
 
-        QuantityWeight quantityWeight = new QuantityWeight(1.0, WeightUnit.KILOGRAM);
-        QuantityWeight quantityWeight1 = new QuantityWeight(1000.0, WeightUnit.GRAM);
-        boolean flag = quantityWeight.equals(quantityWeight1);
-        System.out.println(flag);
-        double ponds = WeightUnit.POUND.convertToBaseUnitKG(kilograms);
-        System.out.println(kilograms+ " kilogram is " + ponds + "lb");
+    @Override
+    public double convertToBaseUnit(double value) {
+        if(Double.isNaN(value) || !Double.isFinite(value)){
+            throw new IllegalArgumentException("value should not be null or infinite");
+        }
+        //return (double) Math.round(value * weightConversionFactor * 1000) /1000.0;
+        return Math.round((value * weightConversionFactor)/ EPSILON) *EPSILON;
+    }
+
+    @Override
+    public double convertFromBaseUnit(double baseValue) {
+        return baseValue / weightConversionFactor;
+    }
+
+    @Override
+    public String geyUnitName() {
+        return this.name();
     }
 }

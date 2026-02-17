@@ -1,6 +1,6 @@
 package com.apps.quantitymeasurement;
 
-public enum LengthUnit {
+public enum LengthUnit implements IMeasurable {
 
     FEET(12.0),
     INCHES(1.0),
@@ -14,22 +14,36 @@ public enum LengthUnit {
         this.conversionFactor = conversionFactor;
     }
 
+    public double convertToBaseUnit() {
+        return LengthUnit.INCHES.conversionFactor;
+    }
+
+    @Override
     public double getConversionFactor() {
         return conversionFactor;
+    }
+
+    @Override
+    public double convertToBaseUnit(double value) {
+       return (double) Math.round(value * conversionFactor * 1000) /1000.0;
+   }
+
+    @Override
+    public double convertFromBaseUnit(double baseValue) {
+        return baseValue/conversionFactor;
+
+    }
+
+    @Override
+    public String geyUnitName() {
+        return this.name();
     }
 
     @Override
     public String toString() {
         return "LengthUnit{" +
                 "conversionFactor=" + conversionFactor +
+                 ",UnitName=" + this.name() +
                 '}';
     }
-
-    public double convertToBaseUnit() {
-        return LengthUnit.INCHES.conversionFactor;
-    }
-   public double convertToBaseUnit(double value) {
-       return (double) Math.round(value * conversionFactor * 1000) /1000;
-   }
-
 }

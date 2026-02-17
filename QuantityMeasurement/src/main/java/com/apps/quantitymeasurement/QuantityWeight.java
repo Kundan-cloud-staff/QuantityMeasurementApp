@@ -100,4 +100,5 @@ public class QuantityWeight {
 
         return new QuantityWeight(result,targetUnit);
     }
+
 }

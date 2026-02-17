@@ -7,11 +7,12 @@
 
 package com.apps.quantitymeasurement;
 
+import javax.swing.*;
 import java.util.Objects;
 
 public class QuantityMeasurementApp {
 
-    public static boolean demonstarateLengthComparision(QuantityLength length1, QuantityLength length2){
+    public static boolean demonstarateLengthComparision(Quantity<LengthUnit> length1, Quantity<LengthUnit> length2){
         boolean result = length1.equals(length2);
         System.out.println("demonstarateLengthComparision:: "+result);
         return result;
@@ -64,6 +65,62 @@ public class QuantityMeasurementApp {
         System.out.println("demonstarateLengthComparision:: "+result);
         return result;
     }
+
+    //UC10
+
+    /**
+     * Demonstrate Equality Comparison between two quantities
+     * @param quantity1
+     * @param quantity2
+     * @return
+     * @param <U>
+     */
+    public static <U extends IMeasurable> boolean demonstrateEquality(Quantity<U> quantity1, Quantity<U> quantity2){
+
+        boolean flag = quantity1.equals(quantity2);
+        System.out.println(quantity1 +"And "+quantity2 +"is "+flag);
+        return flag;
+    }
+
+    /**
+     * Demonstrate conversion of a qunatity to a target unit
+     * @param quantity
+     * @param targetUnit
+     * @return
+     * @param <U>
+     */
+    public static <U extends IMeasurable> Quantity<U> demonstrateConversion(Quantity<U> quantity, U targetUnit){
+
+        double targetUnitValue = quantity.convertTo(targetUnit);
+
+        Quantity<U> requiredQuantity = new Quantity<>(targetUnitValue, targetUnit);
+        System.out.println(requiredQuantity);
+        return requiredQuantity;
+
+    }
+
+    /**
+     * Demonstrate addition of two quantity and return the result in the unit of the first quantity
+     * @param quantity1
+     * @param quantity2
+     * @return
+     * @param <U>
+     */
+    public static <U extends IMeasurable> Quantity<U> demonstrateAddition(Quantity<U> quantity1, Quantity<U> quantity2) {
+
+        Quantity<U> additionOfTwoQuantity =  quantity1.add(quantity2);
+        System.out.println(additionOfTwoQuantity);
+        return  additionOfTwoQuantity;
+    }
+
+    public static <U extends IMeasurable> Quantity<U> demonstrateAddition(Quantity<U> quantity1, Quantity<U> quantity2, U targetUnit) {
+
+        Quantity<U> additionOfTwoQuantity =  quantity1.add(quantity2, targetUnit);
+        System.out.println(additionOfTwoQuantity);
+        return  additionOfTwoQuantity;
+    }
+
+
 
 
 
@@ -163,5 +220,29 @@ public class QuantityMeasurementApp {
         //Category Incompatibility:
         //Input: Quantity(1.0, KILOGRAM).equals(Quantity(1.0, FOOT)) → Output: false (or exception)
         incompatibilityCheck(new QuantityWeight(1.0, WeightUnit.KILOGRAM), new QuantityLength(1.0, LengthUnit.FEET));
+
+        //Generic Quantity Class with Unit Interface for Multi-Category Support
+
+        Quantity<LengthUnit> lengthFeet = new Quantity<>(1.0, LengthUnit.FEET);
+        Quantity<LengthUnit> lengthInches = new Quantity<>(12.0, LengthUnit.INCHES);
+
+         demonstrateEquality(lengthFeet, lengthInches);
+
+        demonstrateConversion(lengthFeet, LengthUnit.YARD);
+        demonstrateConversion(new Quantity<WeightUnit>(1.0, WeightUnit.KILOGRAM), WeightUnit.GRAM);
+
+        demonstrateAddition(lengthFeet, lengthInches);
+
+        //Input: Quantity(1.0, KILOGRAM).add(Quantity(1000.0, GRAM), GRAM) → Output: Quantity(2000.0, GRAM)
+        demonstrateAddition(new Quantity<WeightUnit>(1.0,WeightUnit.KILOGRAM), new Quantity<WeightUnit>(1000.0, WeightUnit.GRAM), WeightUnit.GRAM);
+
+        //Input: Quantity(1.0, POUND).add(Quantity(453.592, GRAM), POUND) → Output: Quantity(~2.0, POUND)
+        demonstrateAddition(new Quantity<WeightUnit>(1.0,WeightUnit.POUND), new Quantity<WeightUnit>(453.592, WeightUnit.GRAM), WeightUnit.POUND);
+
+        //Input: Quantity(2.0, KILOGRAM).add(Quantity(4.0, POUND), KILOGRAM) → Output: Quantity(~3.82, KILOGRAM)
+        demonstrateAddition(new Quantity<WeightUnit>(2.0,WeightUnit.KILOGRAM), new Quantity<WeightUnit>(2.20462, WeightUnit.POUND), WeightUnit.KILOGRAM);
+
+        demonstrateAddition(new Quantity<LengthUnit>(1.0,LengthUnit.FEET), new Quantity<LengthUnit>(12.0, LengthUnit.INCHES), LengthUnit.FEET);
+
     }
 }

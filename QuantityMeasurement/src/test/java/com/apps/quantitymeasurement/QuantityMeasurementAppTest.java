@@ -8,88 +8,88 @@ public class QuantityMeasurementAppTest {
     @Test
     public void testEquality_YardToYard_SameValue(){
         boolean result = QuantityMeasurementApp.demonstarateLengthComparision(
-                        new QuantityLength(1.0, LengthUnit.YARD),
-                new QuantityLength(1.0, LengthUnit.YARD));
+                        new Quantity<>(1.0, LengthUnit.YARD),
+                new Quantity<>(1.0, LengthUnit.YARD));
         Assertions.assertTrue(result);
     }
 
     @Test
     public void testEquality_YardToYard_DifferentValue(){
         boolean result = QuantityMeasurementApp.demonstarateLengthComparision(
-                        new QuantityLength(1.0, LengthUnit.YARD),
-                new QuantityLength(2.0, LengthUnit.YARD));
+                        new Quantity<>(1.0, LengthUnit.YARD),
+                new Quantity<>(2.0, LengthUnit.YARD));
         Assertions.assertFalse(result);
     }
 
     @Test
     public void testEquality_YardToFeet_EquivalentValue(){
         boolean result = QuantityMeasurementApp.demonstarateLengthComparision(
-                new QuantityLength(1.0, LengthUnit.YARD),
-                new QuantityLength(3.0, LengthUnit.FEET));
+                new Quantity<>(1.0, LengthUnit.YARD),
+                new Quantity<>(3.0, LengthUnit.FEET));
         Assertions.assertTrue(result);
     }
 
     @Test
     public void testEquality_FeetToYard_EquivalentValue(){
         boolean result = QuantityMeasurementApp.demonstarateLengthComparision(
-                new QuantityLength(3.0, LengthUnit.FEET),
-                new QuantityLength(1.0, LengthUnit.YARD));
+                new Quantity<>(3.0, LengthUnit.FEET),
+                new Quantity<>(1.0, LengthUnit.YARD));
         Assertions.assertTrue(result);
         }
 
     @Test
     public void testEquality_YardToInches_EquivalentValue(){
         boolean result = QuantityMeasurementApp.demonstarateLengthComparision(
-                new QuantityLength(1.0, LengthUnit.YARD),
-                new QuantityLength(36.0, LengthUnit.INCHES));
+                new Quantity<>(1.0, LengthUnit.YARD),
+                new Quantity<>(36.0, LengthUnit.INCHES));
         Assertions.assertTrue(result);
     }
 
     @Test
     public void testEquality_InchesToYard_EquivalentValue(){
         boolean result = QuantityMeasurementApp.demonstarateLengthComparision(
-                new QuantityLength(36.0, LengthUnit.INCHES),
-                new QuantityLength(1.0, LengthUnit.YARD));
+                new Quantity<>(36.0, LengthUnit.INCHES),
+                new Quantity<>(1.0, LengthUnit.YARD));
         Assertions.assertTrue(result);
     }
 
     @Test
     public void testEquality_YardToFeet_NonEquivalentValue(){
         boolean result = QuantityMeasurementApp.demonstarateLengthComparision(
-                new QuantityLength(1.0, LengthUnit.YARD),
-                new QuantityLength(2.0, LengthUnit.FEET));
+                new Quantity<>(1.0, LengthUnit.YARD),
+                new Quantity<>(2.0, LengthUnit.FEET));
         Assertions.assertFalse(result);
     }
 
     @Test
     public void testEquality_centimetersToInches_EquivalentValue(){
         boolean result = QuantityMeasurementApp.demonstarateLengthComparision(
-                new QuantityLength(1.0, LengthUnit.CENTIMETERS),
-                new QuantityLength(0.393701, LengthUnit.INCHES));
+                new Quantity<>(1.0, LengthUnit.CENTIMETERS),
+                new Quantity<>(0.393701, LengthUnit.INCHES));
         Assertions.assertTrue(result);
     }
 
     @Test
     public void testEquality_centimetersToFeet_NonEquivalentValue(){
         boolean result = QuantityMeasurementApp.demonstarateLengthComparision(
-                new QuantityLength(1.0, LengthUnit.CENTIMETERS),
-                new QuantityLength(1.0, LengthUnit.FEET));
+                new Quantity<>(1.0, LengthUnit.CENTIMETERS),
+                new Quantity<>(1.0, LengthUnit.FEET));
         Assertions.assertFalse(result);
     }
 
     @Test
     public void testEquality_MultiUnit_TransitiveProperty(){
         boolean resultA = QuantityMeasurementApp.demonstarateLengthComparision(
-                new QuantityLength(1.0, LengthUnit.YARD),
-                new QuantityLength(3.0, LengthUnit.FEET));
+                new Quantity<>(1.0, LengthUnit.YARD),
+                new Quantity<>(3.0, LengthUnit.FEET));
 
         boolean resultB = QuantityMeasurementApp.demonstarateLengthComparision(
-                new QuantityLength(3.0, LengthUnit.FEET),
-                new QuantityLength(36.0, LengthUnit.INCHES));
+                new Quantity<>(3.0, LengthUnit.FEET),
+                new Quantity<>(36.0, LengthUnit.INCHES));
 
         boolean resultC = QuantityMeasurementApp.demonstarateLengthComparision(
-                new QuantityLength(1.0, LengthUnit.YARD),
-                new QuantityLength(36.0, LengthUnit.INCHES));
+                new Quantity<>(1.0, LengthUnit.YARD),
+                new Quantity<>(36.0, LengthUnit.INCHES));
         Assertions.assertEquals(resultA,resultB);
         Assertions.assertEquals(resultB,resultC);
         Assertions.assertEquals(resultC,resultA);
@@ -99,8 +99,8 @@ public class QuantityMeasurementAppTest {
     public void testEquality_YardWithNullUnit(){
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             QuantityMeasurementApp.demonstarateLengthComparision(
-                    new QuantityLength(1.0, null),
-                    new QuantityLength(36.0, LengthUnit.INCHES));
+                    new Quantity<>(1.0, null),
+                    new Quantity<>(36.0, LengthUnit.INCHES));
         });
 
     }
@@ -111,15 +111,15 @@ public class QuantityMeasurementAppTest {
     @Test
     public void testEquality_YardSameReference(){
 
-        QuantityLength quantityLength = new QuantityLength(1.0, LengthUnit.YARD);
-        QuantityLength quantityLengthRef = quantityLength;
+        Quantity<LengthUnit> quantityLength = new Quantity<>(1.0, LengthUnit.YARD);
+        Quantity<LengthUnit> quantityLengthRef = quantityLength;
         Assertions.assertEquals(quantityLength,quantityLengthRef);
     }
 
     @Test
     public void testEquality_YardNullComparison(){
         boolean result = QuantityMeasurementApp.demonstarateLengthComparision(
-                new QuantityLength(1.0, LengthUnit.YARD),
+                new Quantity<>(1.0, LengthUnit.YARD),
                 null);
         Assertions.assertFalse(result);
     }
@@ -129,23 +129,23 @@ public class QuantityMeasurementAppTest {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             QuantityMeasurementApp.demonstarateLengthComparision(
-                    new QuantityLength(100.0, LengthUnit.CENTIMETERS),
-                    new QuantityLength(100.0, null));
+                    new Quantity<>(100.0, LengthUnit.CENTIMETERS),
+                    new Quantity<>(100.0, null));
         });
     }
 
     @Test
     public void testEquality_CentimetersSameReference(){
 
-        QuantityLength quantityLength = new QuantityLength(100.0, LengthUnit.CENTIMETERS);
-        QuantityLength quantityLengthRef = quantityLength;
+        Quantity<LengthUnit> quantityLength = new Quantity<>(100.0, LengthUnit.CENTIMETERS);
+        Quantity<LengthUnit> quantityLengthRef = quantityLength;
         Assertions.assertEquals(quantityLength,quantityLengthRef);
     }
 
     @Test
     public void testEquality_CentimetersNullComparison() {
         boolean result = QuantityMeasurementApp.demonstarateLengthComparision(
-                new QuantityLength(1.0, LengthUnit.YARD),
+                new Quantity<>(1.0, LengthUnit.YARD),
                 null);
         Assertions.assertFalse(result);
     }
@@ -153,12 +153,12 @@ public class QuantityMeasurementAppTest {
     @Test
     public void testEquality_AllUnits_ComplexScenario() {
         boolean resultA = QuantityMeasurementApp.demonstarateLengthComparision(
-                new QuantityLength(2.0, LengthUnit.YARD),
-                new QuantityLength(6.0, LengthUnit.FEET));
+                new Quantity<>(2.0, LengthUnit.YARD),
+                new Quantity<>(6.0, LengthUnit.FEET));
 
         boolean resultB = QuantityMeasurementApp.demonstarateLengthComparision(
-                new QuantityLength(6.0, LengthUnit.FEET),
-                new QuantityLength(72.0, LengthUnit.INCHES));
+                new Quantity<>(6.0, LengthUnit.FEET),
+                new Quantity<>(72.0, LengthUnit.INCHES));
         Assertions.assertEquals(resultA,resultB);
     }
 
@@ -715,4 +715,173 @@ public class QuantityMeasurementAppTest {
         Assertions.assertEquals(2e6, result);
     }
 
+    //UC10 Test cases
+    @Test
+    public void testMeasurableInterface_LengthUnitImplementation(){
+
+        //Verifies that LengthUnit correctly implements IMeasurable interface
+        //Test All interface methods are present and functional.
+
+        double baseUnitVal = LengthUnit.FEET.convertToBaseUnit();
+        double baseUnitValWithParam = LengthUnit.FEET.convertToBaseUnit(2.0);
+
+        double conversionFactor = LengthUnit.FEET.getConversionFactor();
+
+        double convertFromBaseUnit =LengthUnit.FEET.convertFromBaseUnit(12.0);
+        Assertions.assertEquals(1.0, baseUnitVal);
+        Assertions.assertEquals(24.0, baseUnitValWithParam);
+        Assertions.assertEquals(12.0, conversionFactor);
+        Assertions.assertEquals(1.0, convertFromBaseUnit);
+    }
+
+    @Test
+    public void testMeasurableInterface_WeightUnitImplementation() {
+
+        double baseUnitVal = WeightUnit.KILOGRAM.convertToBaseUnit(2.0);
+
+        double conversionFactor = WeightUnit.GRAM.getConversionFactor();
+
+        double convertFromBaseUnit =WeightUnit.POUND.convertFromBaseUnit(1.0);
+        Assertions.assertEquals(2.0, baseUnitVal);
+        Assertions.assertEquals(0.001, conversionFactor);
+        Assertions.assertEquals(2.2046244201837775, convertFromBaseUnit);
+    }
+
+    @Test
+    public void testMeasurableInterface_ConsistentBehaviour() {
+
+        double baseUnitVal = WeightUnit.KILOGRAM.convertToBaseUnit(2.0);
+
+        double conversionFactor = LengthUnit.YARD.getConversionFactor();
+
+        double convertFromBaseUnit =WeightUnit.POUND.convertFromBaseUnit(1.0);
+        Assertions.assertEquals(2.0, baseUnitVal);
+        Assertions.assertEquals(36.0, conversionFactor);
+    }
+
+    @Test
+    public void testGenericQuantity_LengthOperations_Equality() {
+
+        Quantity<LengthUnit> lengthUnitQuantity = new Quantity<>(1.0, LengthUnit.FEET);
+
+        QuantityLength quantityLength = new QuantityLength(1.0, LengthUnit.FEET);
+
+        Assertions.assertEquals(lengthUnitQuantity.getValue(),quantityLength.getValue());
+    }
+
+    @Test
+    public void testGenericQuantity_WeightOperations_Equality() {
+
+        Quantity<WeightUnit> weightQuantity = new Quantity<>(1.0, WeightUnit.KILOGRAM);
+
+        QuantityWeight quantityWeight = new QuantityWeight(1.0, WeightUnit.KILOGRAM);
+
+        Assertions.assertEquals(weightQuantity.getValue(),quantityWeight.getWeightValue());
+    }
+    @Test
+    public void testGenericQuantity_LengthOperations_Conversion() {
+
+        Quantity<LengthUnit> lengthUnitQuantity = new Quantity<>(1.0, LengthUnit.FEET);
+        double quantityInInches = lengthUnitQuantity.convertTo(LengthUnit.INCHES);
+        Assertions.assertEquals(12.0,quantityInInches);
+    }
+
+    @Test
+    public void testGenericQuantity_WeightOperations_Conversion() {
+
+        Quantity<WeightUnit> weightUnitQuantity = new Quantity<>(1.0, WeightUnit.KILOGRAM);
+        double quantityInGrams = weightUnitQuantity.convertTo(WeightUnit.GRAM);
+        Assertions.assertEquals(1000.0,quantityInGrams);
+    }
+
+    @Test
+    public void testGenericQuantity_LengthOperations_Addition() {
+
+        Quantity<LengthUnit> lengthUnitQuantity = new Quantity<>(1.0, LengthUnit.FEET);
+        Quantity<LengthUnit> quantity = lengthUnitQuantity.add(new Quantity<>(12.0,LengthUnit.INCHES), LengthUnit.FEET);
+        Assertions.assertEquals(2.0,quantity.getValue());
+    }
+    @Test
+    public void testGenericQuantity_WeightOperations_Addition() {
+
+        Quantity<WeightUnit> weightUnitQuantity = new Quantity<>(1.0, WeightUnit.KILOGRAM);
+        Quantity<WeightUnit> quantity = weightUnitQuantity.add(new Quantity<>(1000.0,WeightUnit.GRAM), WeightUnit.KILOGRAM);
+        Assertions.assertEquals(2.0,quantity.getValue());
+    }
+
+    @Test
+    public void testCrossCategoryPrevention_LengthVsWeight() {
+
+        Quantity<WeightUnit> weightUnitQuantity = new Quantity<>(1.0, WeightUnit.KILOGRAM);
+        Quantity<LengthUnit> lengthUnitQuantity = new Quantity<>(1.0, LengthUnit.FEET);
+        boolean flag = weightUnitQuantity.equals(lengthUnitQuantity);
+        Assertions.assertFalse(flag);
+    }
+
+    @Test
+    public void testCrossCategoryPrevention_CompilerTypeSaftey() {
+
+        //compile-time error
+       // Quantity<WeightUnit> weightUnitQuantity = new Quantity<LengthUnit>(1.0, LengthUnit.FEET);
+
+    }
+
+    @Test
+    public void testGenericQuantity_ConstractorValidation_NullUnit() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new Quantity<>(1.0, null);
+        });
+    }
+
+    @Test
+    public void testGenericQuantity_Conversion_AllUnitCombination() {
+
+        Quantity<LengthUnit> lengthUnitQuantity = new Quantity<>(1.0, LengthUnit.FEET);
+        Assertions.assertEquals(1.0, lengthUnitQuantity.convertTo(LengthUnit.FEET));
+        Assertions.assertEquals(12.0, lengthUnitQuantity.convertTo(LengthUnit.INCHES));
+        Assertions.assertEquals(30.48, lengthUnitQuantity.convertTo(LengthUnit.CENTIMETERS));
+        Assertions.assertEquals(0.333, lengthUnitQuantity.convertTo(LengthUnit.YARD));
+
+        Quantity<WeightUnit> weightUnitQuantityKG = new Quantity<>(1.0, WeightUnit.KILOGRAM);
+        Assertions.assertEquals(1.0, weightUnitQuantityKG.convertTo(WeightUnit.KILOGRAM));
+        Assertions.assertEquals(1000.0, weightUnitQuantityKG.convertTo(WeightUnit.GRAM));
+        Assertions.assertEquals(2.205, weightUnitQuantityKG.convertTo(WeightUnit.POUND));
+    }
+
+    //15
+    @Test
+    public void testGenericQuantity_AdditionAllUnitCombinations() {
+        //same and different unit cross categories
+        Quantity<LengthUnit> feetUnitCheck = new Quantity<>(1.0, LengthUnit.FEET).add(new Quantity<>(1.0, LengthUnit.FEET));
+        Quantity<LengthUnit> inchesUnitCheck = new Quantity<>(12.0, LengthUnit.INCHES).add(new Quantity<>(12.0, LengthUnit.INCHES));
+        Quantity<LengthUnit> yardUnitCheck = new Quantity<>(1.0, LengthUnit.YARD).add(new Quantity<>(1.0, LengthUnit.YARD));
+        Quantity<LengthUnit> centimeterUnitCheck = new Quantity<>(200.0, LengthUnit.CENTIMETERS).add(new Quantity<>(100.0, LengthUnit.CENTIMETERS));
+
+        Assertions.assertEquals(2.0, feetUnitCheck.getValue());
+        Assertions.assertEquals(24.0, inchesUnitCheck.getValue());
+        Assertions.assertEquals(2.0, yardUnitCheck.getValue());
+        Assertions.assertEquals(300.0, centimeterUnitCheck.getValue());
+
+        Quantity<WeightUnit> kgUnitCheck = new Quantity<>(1.0, WeightUnit.KILOGRAM).add(new Quantity<>(5.0, WeightUnit.KILOGRAM));
+        Quantity<WeightUnit> gramUnitCheck = new Quantity<>(100.0, WeightUnit.GRAM).add(new Quantity<>(1000.0, WeightUnit.GRAM));
+        Quantity<WeightUnit> poundUnitCheck = new Quantity<>(1.0, WeightUnit.POUND).add(new Quantity<>(10.0, WeightUnit.POUND));
+
+        Assertions.assertEquals(6.0, kgUnitCheck.getValue());
+        Assertions.assertEquals(1100.0, gramUnitCheck.getValue());
+        Assertions.assertEquals(11.0, poundUnitCheck.getValue());
+
+    }
+
+    @Test
+    public void testTypeWildcard_FlexibleSignature() {
+        Quantity<?> quantityFeet = new Quantity<IMeasurable>(1.0, LengthUnit.FEET);
+        Quantity<?> quantityInches = new Quantity<IMeasurable>(12.0, LengthUnit.INCHES);
+        boolean flag = quantityFeet.compare(quantityInches);
+        Assertions.assertTrue(flag);
+
+        Quantity<?> quantityKg = new Quantity<>(1.0, WeightUnit.KILOGRAM);
+        Quantity<?> quantityGram = new Quantity<>(1000.0, WeightUnit.GRAM);
+        boolean flag1 = quantityFeet.compare(quantityInches);
+        Assertions.assertTrue(flag1);
+    }
 }
